@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 
 const colorRed = Color.fromRGBO(231, 28, 36, 1);
 const colorDark = Color.fromRGBO(136, 28, 32, 1);
@@ -93,6 +94,7 @@ ButtonStyle AppButtonStyle(){
       elevation: 1,
       padding: EdgeInsets.zero,
       backgroundColor: Colors.transparent,
+      foregroundColor: colorWhite,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6))
   );
 }
@@ -122,6 +124,22 @@ Ink SuccessButtonChild(String ButtonText){
       alignment: Alignment.center,
       child:Text(ButtonText,style: ButtonTextStyle(),),
     ),
+  );
+}
+
+PinTheme AppOTPStyle () {
+  return PinTheme(
+    inactiveColor: colorGreen,
+    inactiveFillColor: colorWhite,
+    selectedColor: colorGreen,
+    activeColor: colorWhite,
+    selectedFillColor: colorWhite,
+    borderRadius: BorderRadius.circular(5),
+    fieldHeight: 50,
+    fieldWidth: 45,
+    activeFillColor: colorGreen,
+    shape: PinCodeFieldShape.box,
+
   );
 }
 
