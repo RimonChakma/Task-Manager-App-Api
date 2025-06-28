@@ -17,12 +17,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "TaskManager",
-      initialRoute: "/",
+      initialRoute: "/pinVerificationScreen",
       routes: {
         "/" : (context)=> SplashScreen(),
         "/setPasswordScreen" : (context)=>setPasswordScreen(),
         "/registrationScreen" : (context)=>RegistrationScreen(),
-        "pinVerificationScreen" : (context)=>PinverificationScreen(),
+        "/pinVerificationScreen" : (context)=>PinverificationScreen(),
         "/loginScreen" : (context)=>Loginscreen(),
         "/emailVerificationScreen" :(context)=>Emailverificationscreen()
       },
