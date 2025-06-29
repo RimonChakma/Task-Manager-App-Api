@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 const colorRed = Color.fromRGBO(231, 28, 36, 1);
@@ -143,3 +144,25 @@ PinTheme AppOTPStyle () {
   );
 }
 
+void successToast (String msg) {
+  Fluttertoast.showToast(
+      msg: msg,
+    gravity: ToastGravity.BOTTOM,
+    timeInSecForIosWeb: 1,
+    toastLength: Toast.LENGTH_SHORT,
+    backgroundColor: colorWhite,
+    fontSize: 16,
+    textColor: colorDark
+  );
+}
+
+void errorToast (String msg) {
+  Fluttertoast.showToast(msg: msg,
+  gravity: ToastGravity.BOTTOM,
+    timeInSecForIosWeb: 1,
+    toastLength: Toast.LENGTH_SHORT,
+    backgroundColor: colorWhite,
+    textColor: colorDark,
+    fontSize: 16
+  );
+}
