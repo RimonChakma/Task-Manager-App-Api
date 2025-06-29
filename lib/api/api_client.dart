@@ -19,3 +19,18 @@ Future<bool> LoginRequest (formValues) async {
     return false;
   }
 }
+
+Future<bool> RegistrationRequest (formValues) async {
+  var url = Uri.parse("$BaseUrl/registration");
+  var postBody = jsonEncode(formValues);
+  var response = await http.post(url,headers: RequestHeader,body: postBody);
+  var resultBody = jsonDncode(response.body);
+
+  if(response.statusCode == 200 && resultBody["status"] == "success"){
+    successToast("success request");
+    return true;
+  }else{
+    errorToast("failed try again");
+    return false;
+  }
+}
