@@ -48,3 +48,17 @@ Future<bool> VerifyEmailRequest(Email) async{
     return false;
   }
 }
+
+Future<bool> VerifyOTPRequest (Email,OTP) async {
+  var url = Uri.parse("$BaseUrl/RecoverVerifyOTP/$Email/$OTP");
+  var response = await http.get(url,headers: RequestHeader);
+  var resultBody = json.decode(response.body);
+
+  if(response.statusCode == 200 && resultBody["status"] == "success"){
+    successToast("request success");
+    return true;
+  }else{
+    errorToast("failed try again");
+    return false;
+  }
+}
