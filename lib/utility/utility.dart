@@ -11,3 +11,10 @@ import 'package:shared_preferences/shared_preferences.dart';
   await prefer.setString("password", userData["data"]["password"]);
   await prefer.setString("conformPassword", userData["data"]["conformPassword"]);
 }
+
+readUserData (key) async {
+    final prefer = await SharedPreferences.getInstance();
+    String? myData = prefer.getString(key);
+    return myData;
+
+}
