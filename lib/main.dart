@@ -11,7 +11,7 @@ import 'package:task_manager_api/utility/utility.dart';
 void main () async {
 
   WidgetsFlutterBinding.ensureInitialized();
-  String token = await readUserData("token");
+  String? token = await readUserData("token");
 
   if(token == null){
     runApp(MyApp("/loginScreen"));
