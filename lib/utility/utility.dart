@@ -16,5 +16,21 @@ readUserData (key) async {
     final prefer = await SharedPreferences.getInstance();
     String? myData = prefer.getString(key);
     return myData;
-
 }
+
+writeEmailVerification (Email) async {
+    final prefer = await SharedPreferences.getInstance();
+    await prefer.setString("emailVerification",Email);
+}
+
+writeOTPVerification (OTP) async {
+    final prefer = await SharedPreferences.getInstance();
+    await prefer.setString("otp",  OTP);
+}
+
+readUserData (Key) async {
+    final prefer = await SharedPreferences.getInstance();
+    String? data = await prefer.getString(Key);
+    return data;
+}
+

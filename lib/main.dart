@@ -31,7 +31,6 @@ class MyApp extends StatelessWidget {
       title: "TaskManager",
       initialRoute: token,
       routes: {
-        "/" : (context)=> SplashScreen(),
         "/setPasswordScreen" : (context)=>setPasswordScreen(),
         "/registrationScreen" : (context)=>RegistrationScreen(),
         "/pinVerificationScreen" : (context)=>PinverificationScreen(),
