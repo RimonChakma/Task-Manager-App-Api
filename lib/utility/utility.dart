@@ -28,7 +28,7 @@ writeOTPVerification (OTP) async {
     await prefer.setString("otp",  OTP);
 }
 
-readUserData (Key) async {
+readData (Key) async {
     final prefer = await SharedPreferences.getInstance();
     String? data = await prefer.getString(Key);
     return data;

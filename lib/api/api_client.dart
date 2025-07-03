@@ -30,6 +30,7 @@ Future<bool> RegistrationRequest (formValues) async {
 
   if(response.statusCode == 200 && resultBody["status"] == "success"){
     successToast("success request");
+    print(response.body);
     return true;
   }else{
     errorToast("failed try again");
@@ -42,6 +43,7 @@ Future<bool> VerifyEmailRequest(Email) async{
   var response= await http.get(url,headers:RequestHeader);
   var resultBody=json.decode(response.body);
   if(response.statusCode == 200 && resultBody['status']=="success"){
+    await writeEmailVerification(Email);
     successToast("Request Success");
     return true;
   }
