@@ -53,16 +53,20 @@ Future<bool> VerifyEmailRequest(Email) async{
   }
 }
 
-Future<bool> VerifyOTPRequest (Email,OTP) async {
+Future<bool> VerifyOTPRequest (String? Email, String? OTP) async {
   var url = Uri.parse("$BaseUrl/RecoverVerifyOTP/$Email/$OTP");
-  var response = await http.get(url,headers: RequestHeader);
+  var response = await http.get(url, headers: RequestHeader);
+  print("Email: $Email, OTP: $OTP");
+  print("Response: ${response.body}");
+
   var resultBody = json.decode(response.body);
 
-  if(response.statusCode == 200 && resultBody["status"] == "success"){
-    successToast("request success");
+  if (response.statusCode == 200 && resultBody["status"] == "success") {
+    await writeOTPVerification(OTP ?? "");
+    successToast("Request success");
     return true;
-  }else{
-    errorToast("failed try again");
+  } else {
+    errorToast("Failed! Try again.");
     return false;
   }
 }
