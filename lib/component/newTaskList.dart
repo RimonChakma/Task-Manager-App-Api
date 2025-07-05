@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_manager_api/api/api_client.dart';
 
 class Newtasklist extends StatefulWidget {
   const Newtasklist({super.key});
@@ -8,6 +9,31 @@ class Newtasklist extends StatefulWidget {
 }
 
 class _NewtasklistState extends State<Newtasklist> {
+
+
+  List taskItem = [];
+  bool isLoading = true;
+
+
+  @override
+  void initState() {
+    callData();
+    super.initState();
+  }
+
+
+  callData () async {
+
+    final data = await TaskListRequest("newTask");
+
+    setState(() {
+      isLoading = false;
+      taskItem = data;
+    });
+
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold();
