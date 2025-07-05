@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:task_manager_api/component/appBottomNav.dart';
+import 'package:task_manager_api/component/canceledTaskList.dart';
+import 'package:task_manager_api/component/completeTask.dart';
+import 'package:task_manager_api/component/newTaskList.dart';
+import 'package:task_manager_api/component/progressTask.dart';
 
 class Homescreen extends StatefulWidget {
   const Homescreen({super.key});
@@ -10,21 +14,28 @@ class Homescreen extends StatefulWidget {
 
 class _HomescreenState extends State<Homescreen> {
 
-  int bottomTabItem = 1;
+  int tabItem = 1;
 
   onTabItem (int index) {
     setState(() {
-      bottomTabItem;
+      tabItem = index;
     });
-
   }
+
+ final widgetOption = [
+   Newtasklist(),
+   Progresstask(),
+   Completetask(),
+   Canceledtasklist()
+ ];
 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(backgroundColor: Colors.blue,),
-      bottomNavigationBar: appBottomNav(bottomTabItem,onTabItem),
+      body: widgetOption.elementAt(tabItem),
+      bottomNavigationBar: appBottomNav(tabItem,onTabItem),
 
     );
   }
