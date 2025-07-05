@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:task_manager_api/style/style.dart';
 
-BottomNavigationBar appBottomNav (currentIndex,) {
+BottomNavigationBar appBottomNav (currentIndex, onTabItem) {
   return BottomNavigationBar(items: [
     BottomNavigationBarItem(
         icon: Icon(Icons.list_alt),
@@ -26,5 +26,6 @@ BottomNavigationBar appBottomNav (currentIndex,) {
     showSelectedLabels: true,
     showUnselectedLabels: true,
     type: BottomNavigationBarType.fixed,
+    onTap: onTabItem,
   );
 }

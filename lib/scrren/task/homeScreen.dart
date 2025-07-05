@@ -9,11 +9,22 @@ class Homescreen extends StatefulWidget {
 }
 
 class _HomescreenState extends State<Homescreen> {
+
+  int bottomTabItem = 1;
+
+  onTabItem (int index) {
+    setState(() {
+      bottomTabItem;
+    });
+
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(backgroundColor: Colors.blue,),
-      bottomNavigationBar: appBottomNav(1,),
+      bottomNavigationBar: appBottomNav(bottomTabItem,onTabItem),
 
     );
   }
