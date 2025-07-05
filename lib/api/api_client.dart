@@ -89,3 +89,19 @@ Future<bool> SetPasswordRequest (formValues) async {
     return false;
   }
 }
+
+Future<List> TaskListRequest(Status) async {
+  var url=Uri.parse("$BaseUrl}/listTaskByStatus/${Status}");
+  String? token= await readUserData("token");
+  var requestHeaderWithToken={"Content-Type":"application/json","token":'$token'};
+  var response= await http.get(url,headers:requestHeaderWithToken);
+  var resultBody=json.decode(response.body);
+  if(response.statusCode==200 && resultBody['status']=="success"){
+    successToast("Request Success");
+    return resultBody['data'];
+  }
+  else{
+    errorToast("Request fail ! try again");
+    return [];
+  }
+}
