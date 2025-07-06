@@ -24,7 +24,7 @@ class _CompletetaskState extends State<Completetask> {
 
   callData () async {
 
-    final data = await TaskListRequest("newTask");
+    final data = await TaskListRequest("completed");
 
     setState(() {
       isLoading = false;
@@ -36,6 +36,6 @@ class _CompletetaskState extends State<Completetask> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(body: isLoading?Center(child: CircularProgressIndicator(),):Center(child: Text("newtask"),),);
   }
 }

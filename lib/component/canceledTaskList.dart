@@ -24,7 +24,7 @@ class _CanceledtasklistState extends State<Canceledtasklist> {
 
   callData () async {
 
-    final data = await TaskListRequest("newTask");
+    final data = await TaskListRequest("canceled");
 
     setState(() {
       isLoading = false;
@@ -36,6 +36,6 @@ class _CanceledtasklistState extends State<Canceledtasklist> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(body: isLoading?Center(child: CircularProgressIndicator(),):Center(child: Text("newtask"),),);
   }
 }

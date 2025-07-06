@@ -24,7 +24,7 @@ class _ProgresstaskState extends State<Progresstask> {
 
   callData () async {
 
-    final data = await TaskListRequest("newTask");
+    final data = await TaskListRequest("progress");
 
     setState(() {
       isLoading = false;
@@ -36,6 +36,6 @@ class _ProgresstaskState extends State<Progresstask> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(body: isLoading?Center(child: CircularProgressIndicator(),):Center(child: Text("newtask"),),);
   }
 }
