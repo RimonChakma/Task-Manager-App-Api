@@ -13,30 +13,27 @@ class Homescreen extends StatefulWidget {
 }
 
 class _HomescreenState extends State<Homescreen> {
+  int tabItem = 0;
 
-  int tabItem = 1;
-
-  onTabItem (int index) {
+  onTabItem(int index) {
     setState(() {
       tabItem = index;
     });
   }
 
- final widgetOption = [
-   Newtasklist(),
-   Progresstask(),
-   Completetask(),
-   Canceledtasklist()
- ];
-
+  List<Widget> widgetOption = [
+    Newtasklist(key: UniqueKey()),
+    Progresstask(key: UniqueKey()),
+    Completetask(key: UniqueKey()),
+    Canceledtasklist(key: UniqueKey()),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.blue,),
-      body: widgetOption.elementAt(tabItem),
-      bottomNavigationBar: appBottomNav(tabItem,onTabItem),
-
+      appBar: AppBar(backgroundColor: Colors.blue),
+      body: widgetOption[tabItem],
+      bottomNavigationBar: appBottomNav(tabItem, onTabItem),
     );
   }
 }

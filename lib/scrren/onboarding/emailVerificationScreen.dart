@@ -12,6 +12,7 @@ class Emailverificationscreen extends StatefulWidget {
 
 class _EmailverificationscreenState extends State<Emailverificationscreen> {
 
+  TextEditingController emailController = TextEditingController();
 
   Map<String,String> formValues = {"email": ""};
   bool isLoading = false;
@@ -23,6 +24,17 @@ class _EmailverificationscreenState extends State<Emailverificationscreen> {
   }
 
   final formState = GlobalKey<FormState>();
+  @override
+  void initState() {
+    super.initState();
+    emailController.text = ""; // Optional, ensures it's clear
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose(); // Prevent memory leak
+    super.dispose();
+  }
 
 
   @override
@@ -45,6 +57,7 @@ class _EmailverificationscreenState extends State<Emailverificationscreen> {
                     Form(
                       key: formState,
                       child:  TextFormField(
+                        controller: emailController,
                         onChanged: (value) {
                           inputOnChange("email", value);
                         },

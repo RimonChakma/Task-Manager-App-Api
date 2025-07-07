@@ -5,6 +5,7 @@ import 'package:task_manager_api/scrren/onboarding/pinVerificationScreen.dart';
 import 'package:task_manager_api/scrren/onboarding/registration_screen.dart';
 import 'package:task_manager_api/scrren/onboarding/setPasswordScreen.dart';
 import 'package:task_manager_api/scrren/onboarding/splash_screen.dart';
+import 'package:task_manager_api/scrren/task/homeScreen.dart';
 import 'package:task_manager_api/scrren/task/taskCreateScreen.dart';
 import 'package:task_manager_api/utility/utility.dart';
 
@@ -16,7 +17,7 @@ void main () async {
   if(token == null){
     runApp(MyApp("/loginScreen"));
   }else{
-    runApp(MyApp("/newTaskScreen"));
+    runApp(MyApp("/"));
   }
 }
 class MyApp extends StatelessWidget {
@@ -29,8 +30,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "TaskManager",
-      initialRoute: "/loginScreen",
+      initialRoute: token,
       routes: {
+        "/" :(context) =>Homescreen(),
         "/setPasswordScreen" : (context)=>setPasswordScreen(),
         "/registrationScreen" : (context)=>RegistrationScreen(),
         "/pinVerificationScreen" : (context)=>PinverificationScreen(),

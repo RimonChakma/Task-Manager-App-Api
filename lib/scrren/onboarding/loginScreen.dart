@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:task_manager_api/scrren/onboarding/registration_screen.dart';
 import 'package:task_manager_api/style/style.dart';
-
 import '../../api/api_client.dart';
 
 class Loginscreen extends StatefulWidget {
@@ -12,86 +10,126 @@ class Loginscreen extends StatefulWidget {
 }
 
 class _LoginscreenState extends State<Loginscreen> {
-
-  Map<String,String> formValues = {"email":"","password":""};
+  Map<String, String> formValues = {"email": "", "password": ""};
   bool isLoading = false;
-
-  inputOnChange (mapKey,textValue) {
-    setState(() {
-      formValues.update(mapKey, (value) => textValue,);
-    });
-  }
 
   final formState = GlobalKey<FormState>();
 
+  void inputOnChange(String mapKey, String textValue) {
+    setState(() {
+      formValues.update(mapKey, (value) => textValue);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: isLoading? Center(child: CircularProgressIndicator(),):
-      Stack(
+      body: isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : Stack(
         children: [
           ScreenBackground(context),
-          Padding(padding: EdgeInsets.all(30),child:Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("Join with us",style: head1Text(colorDarkBlue),),
-                SizedBox(height: 5,),
-                Text("Login your account",style: head2Text(colorLightGray),),
-                SizedBox(height: 20,),
-
-                Form(
+          SafeArea(
+            child: Center(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(30),
+                  child: Form(
                     key: formState,
-                    child: Column(children: [
-                      TextFormField(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 60),
+                        Text("Join with us", style: head1Text(colorDarkBlue)),
+                        const SizedBox(height: 5),
+                        Text("Login your account", style: head2Text(colorLightGray)),
+                        const SizedBox(height: 20),
 
-                        onChanged: (textValue) {
-                          inputOnChange("email", textValue);
-                        },
-                        validator: (value) {
-                          if(value == null || value.isEmpty){
-                            return "please enter your email address";
-                          }
-                        },
-                        decoration: AppInputDecoration("email address"),),
-                      SizedBox(height: 20,),
+                        TextFormField(
+                          decoration: AppInputDecoration("email address"),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return "Please enter your email address";
+                            }
+                            return null;
+                          },
+                          onChanged: (value) => inputOnChange("email", value),
+                        ),
+                        const SizedBox(height: 20),
 
+                        TextFormField(
+                          decoration: AppInputDecoration("password"),
+                          obscureText: true,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return "Please enter your password";
+                            }
+                            return null;
+                          },
+                          onChanged: (value) => inputOnChange("password", value),
+                        ),
+                        const SizedBox(height: 20),
 
-                      TextFormField(
-                        validator: (value) {
-                          if(value == null || value.isEmpty){
-                            return "please enter your password";
-                          }
-                        },
-                        onChanged: (textValue) {
-                          inputOnChange("password", textValue);
-                        },
-                        decoration: AppInputDecoration("password"),),
-                      SizedBox(height: 20,),
-
-                      Container(child: ElevatedButton(
-                          onPressed: () async{
-                            if(formState.currentState!.validate()){
+                        ElevatedButton(
+                          onPressed: () async {
+                            if (formState.currentState!.validate()) {
                               setState(() {
                                 isLoading = true;
                               });
 
                               var result = await LoginRequest(formValues);
-                              if(result == true){
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => RegistrationScreen(),));
+                              if (result == true) {
+                                print(result);
+                                Navigator.pushNamedAndRemoveUntil(
+                                  context,
+                                  "/",
+                                      (route) => false,
+                                );
                               }
+
                               setState(() {
                                 isLoading = false;
                               });
                             }
-                          },style: AppButtonStyle(),
-                          child: SuccessButtonChild("login")),)
-                    ],)),
-              ],
+                          },
+                          style: AppButtonStyle(),
+                          child: SuccessButtonChild("Login"),
+                        ),
+                        const SizedBox(height: 30),
+
+                        Center(
+                          child: Column(
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  Navigator.pushNamed(context, "/emailVerificationScreen");
+                                },
+                                child: Text(
+                                  'Forget Password?',
+                                  style: head3Text(colorLightGray),
+                                ),
+                              ),
+                              const SizedBox(height: 15),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text("Don't have an account? ", style: head3Text(colorDarkBlue)),
+                                  InkWell(
+                                    onTap: () => Navigator.pushNamed(context, "/registrationScreen"),
+                                    child: Text("Sign Up", style: head3Text(colorGreen)),
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
             ),
-          ),)
+          ),
         ],
       ),
     );

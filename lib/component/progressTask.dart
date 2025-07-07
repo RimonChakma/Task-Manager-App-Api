@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_manager_api/component/task_list.dart';
 
 import '../api/api_client.dart';
 
@@ -36,6 +37,11 @@ class _ProgresstaskState extends State<Progresstask> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: isLoading?Center(child: CircularProgressIndicator(),):Center(child: Text("newtask"),),);
+    return Scaffold(
+
+      body: isLoading?Center(child: CircularProgressIndicator(),):RefreshIndicator(
+        child: taskList(taskItem), onRefresh:() async{
+        await callData();
+      },),);
   }
 }

@@ -16,10 +16,9 @@ const colorLightGray=Color.fromRGBO(135, 142, 150, 1.0);
 const colorLight=Color.fromRGBO(211, 211, 211, 1.0);
 
 
-
 SvgPicture ScreenBackground(context){
   return SvgPicture.asset(
-    'assets/images/background.png',
+    "assets/images/screen-back.svg",
     alignment: Alignment.center,
     width: MediaQuery.of(context).size.width,
     height: MediaQuery.of(context).size.height,
@@ -49,7 +48,7 @@ TextStyle head2Text(textColor){
 TextStyle head3Text(textColor){
   return TextStyle(
       color: textColor,
-      fontSize: 13,
+      fontSize: 15,
       fontFamily: 'poppins',
       fontWeight: FontWeight.w400
   );
@@ -164,5 +163,15 @@ void errorToast (String msg) {
     backgroundColor: colorWhite,
     textColor: colorDark,
     fontSize: 16
+  );
+}
+
+
+SizedBox itemSizeBox (child) {
+  return SizedBox(
+    child: Container(
+      child: child,
+      padding: EdgeInsets.all(10),
+    ),
   );
 }

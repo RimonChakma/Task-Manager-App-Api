@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:task_manager_api/api/api_client.dart';
+import 'package:task_manager_api/component/task_list.dart';
 
 class Newtasklist extends StatefulWidget {
   const Newtasklist({super.key});
@@ -37,7 +38,10 @@ class _NewtasklistState extends State<Newtasklist> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: isLoading?Center(child: CircularProgressIndicator(),):Center(child: Text("newtask"),),
+      body: isLoading?Center(child: CircularProgressIndicator(),):RefreshIndicator(
+        child: taskList(taskItem), onRefresh:() async{
+         await callData();
+      },),
     );
   }
 }

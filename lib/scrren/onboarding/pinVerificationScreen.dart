@@ -15,17 +15,17 @@ class PinverificationScreen extends StatefulWidget {
 class _PinverificationScreenState extends State<PinverificationScreen> {
 
   Map<String,String> formValues = {"OTP":""};
-  
+
   bool isLoading = false;
-  
+
   inputOnChange (mapKey, textValues) async {
     setState(() {
       formValues.update(mapKey, (value) => textValues,);
     });
   }
-  
+
   final formState = GlobalKey<FormState>();
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +38,7 @@ class _PinverificationScreenState extends State<PinverificationScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Set Password",style: head1Text(colorDarkBlue),),
+                    Text("Set OTP",style: head1Text(colorDarkBlue),),
                     SizedBox(height: 5,),
                     Text("A 6 digit pin has been sent to your number",style: head2Text(colorLightGray),),
                     SizedBox(height: 20,),
@@ -69,8 +69,8 @@ class _PinverificationScreenState extends State<PinverificationScreen> {
                         setState(() {
                           isLoading = true;
                         });
-                        String? emailAddress = await  readData("EmailVerification");
-                        var result = await VerifyOTPRequest(emailAddress, formValues["email"]);
+                        String? emailAddress = await  readData("emailVerification");
+                        var result = await VerifyOTPRequest(emailAddress, formValues["OTP"]);
                         if(result == true){
                           Navigator.pushNamedAndRemoveUntil(context, "/setPasswordScreen", (route) => false,);
                         }else{
